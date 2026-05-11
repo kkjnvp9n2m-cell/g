@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -17,12 +16,12 @@
 
         <div id="game-area">
             <div id="rooster" onclick="clickRooster(event)">
-                <img src="rooster.png.PMG" id="rooster-pic" alt="🐓">
+                <img src="rooster.png.PNG" id="rooster-pic" alt="🐓">
             </div>
         </div>
 
         <div class="shop">
-            <p id="shop-label">Магазин какашек</p>
+            <p>Магазин какашек</p>
             <button id="upgrade-btn" onclick="buyUpgrade()">
                 <span id="btn-text">Купить Обычная 💩</span><br>
                 <small>Цена: <span id="price">100</span></small>
@@ -33,10 +32,11 @@
             <div class="modal">
                 <h2>🎉 ТЫ МОЛОДЕЦ! 🎉</h2>
                 <p>Закидал пэтуха по полной!</p>
-                <button onclick="restartGame()">Ещё раз?</button>
+                <button onclick="location.reload()">Ещё раз?</button>
             </div>
         </div>
     </div>
     <script src="script.js"></script>
 </body>
 </html>
+
