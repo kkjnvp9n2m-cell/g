@@ -1,14 +1,15 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Cock Clicker Pro</title>
+    <title>Cock Clicker</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="app">
-        <h1 id="name-tag">ПЭТУШАРЭ 🐓</h1>
+        <h1>ПЭТУШАРЭ 🐓</h1>
         
         <div class="score-container">
             <span id="score">0</span> 💩
@@ -16,15 +17,15 @@
 
         <div id="game-area">
             <div id="rooster" onclick="clickRooster(event)">
-                <img src="rooster.png" id="rooster-pic" alt="петух">
+                <img src="rooster.png" id="rooster-pic" alt="🐓">
             </div>
         </div>
 
         <div class="shop">
-            <h3 class="shop-title">Магазин какашек</h3>
+            <p id="shop-label">Магазин какашек</p>
             <button id="upgrade-btn" onclick="buyUpgrade()">
                 <span id="btn-text">Купить Обычная 💩</span><br>
-                <span class="price-tag">Цена: <span id="price">100</span></span>
+                <small>Цена: <span id="price">100</span></small>
             </button>
         </div>
 
@@ -32,7 +33,7 @@
             <div class="modal">
                 <h2>🎉 ТЫ МОЛОДЕЦ! 🎉</h2>
                 <p>Закидал пэтуха по полной!</p>
-                <button onclick="location.reload()">Ещё раз?</button>
+                <button onclick="restartGame()">Ещё раз?</button>
             </div>
         </div>
     </div>
