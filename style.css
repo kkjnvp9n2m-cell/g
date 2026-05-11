@@ -101,3 +101,23 @@ body {
 }
 
 .hidden { display: none; }
+#rooster {
+    width: 250px; /* Здесь можно менять размер петуха */
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.1s; /* Плавность при клике */
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+#rooster-pic {
+    width: 100%;
+    height: auto;
+    /* Если у картинки есть белый фон, который мешает, можно добавить: 
+       mix-blend-mode: multiply; (но лучше использовать PNG без фона) */
+}
+
+#rooster:active {
+    transform: scale(0.9); /* Петух уменьшается при нажатии */
+}
+
