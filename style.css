@@ -1,10 +1,12 @@
 body {
     margin: 0;
-    background-color: #2c3e50;
+    padding: 0;
+    background: radial-gradient(circle, #2c3e50 0%, #000000 100%);
     color: white;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Segoe UI', Roboto, sans-serif;
     display: flex;
     justify-content: center;
+    height: 100vh;
     overflow: hidden;
     touch-action: manipulation;
 }
@@ -13,111 +15,137 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    max-width: 400px;
     padding-top: 20px;
 }
 
-#score {
-    font-size: 40px;
+h1 {
+    font-size: 24px;
+    letter-spacing: 2px;
+    text-shadow: 0 0 15px rgba(241, 196, 15, 0.5);
+    margin-bottom: 10px;
+}
+
+.score-container {
+    font-size: 32px;
     font-weight: bold;
-    color: #f1c40f;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px 40px;
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    margin-bottom: 20px;
 }
 
 #game-area {
-    position: relative;
-    width: 300px;
-    height: 300px;
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 40px 0;
+    width: 100%;
+    position: relative;
 }
 
 #rooster {
-    font-size: 120px;
+    width: 220px;
     cursor: pointer;
-    user-select: none;
-    transition: transform 0.1s;
-    z-index: 10;
+    transition: transform 0.05s;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+}
+
+#rooster-pic {
+    width: 100%;
+    height: auto;
+    pointer-events: none;
 }
 
 #rooster:active {
     transform: scale(0.9);
 }
 
-/* Стили для вылетающих какашек */
+.shop {
+    width: 85%;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    padding: 20px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.shop-title {
+    margin: 0 0 15px 0;
+    font-size: 16px;
+    opacity: 0.8;
+}
+
+#upgrade-btn {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #e67e22 0%, #f1c40f 100%);
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    box-shadow: 0 5px 15px rgba(230, 126, 34, 0.3);
+    cursor: pointer;
+}
+
+#upgrade-btn:disabled {
+    background: #444;
+    box-shadow: none;
+    opacity: 0.5;
+}
+
+.price-tag {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+/* Анимация какашек */
 .poop-particle {
     position: absolute;
     font-size: 30px;
     pointer-events: none;
-    animation: fly 0.8s ease-out forwards;
-    z-index: 5;
+    z-index: 100;
+    animation: fly 0.7s ease-out forwards;
 }
 
 @keyframes fly {
-    0% { transform: translate(0, 0) scale(1); opacity: 1; }
-    100% { transform: translate(var(--dx), var(--dy)) scale(0.5); opacity: 0; }
+    0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    100% { transform: translate(var(--dx), var(--dy)) rotate(360deg) scale(0); opacity: 0; }
 }
 
-.shop {
-    background: rgba(0,0,0,0.3);
-    padding: 20px;
-    border-radius: 20px;
+.hidden { display: none; }
+
+#final-message {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal {
+    background: white;
+    color: #222;
+    padding: 30px;
+    border-radius: 30px;
     text-align: center;
-    width: 80%;
 }
 
-#upgrade-btn {
-    padding: 15px 30px;
-    font-size: 18px;
-    border-radius: 15px;
+.modal button {
+    margin-top: 20px;
+    padding: 10px 25px;
+    border-radius: 10px;
     border: none;
     background: #e67e22;
     color: white;
     font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0 4px 0 #d35400;
 }
-
-#upgrade-btn:disabled {
-    background: #7f8c8d;
-    box-shadow: none;
-    opacity: 0.7;
-}
-
-#final-message {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(255, 255, 255, 0.95);
-    color: #2c3e50;
-    padding: 40px;
-    border-radius: 30px;
-    text-align: center;
-    z-index: 100;
-    box-shadow: 0 0 50px rgba(0,0,0,0.5);
-}
-
-.hidden { display: none; }
-#rooster {
-    width: 250px; /* Здесь можно менять размер петуха */
-    height: auto;
-    cursor: pointer;
-    transition: transform 0.1s; /* Плавность при клике */
-    user-select: none;
-    -webkit-user-drag: none;
-}
-
-#rooster-pic {
-    width: 100%;
-    height: auto;
-    /* Если у картинки есть белый фон, который мешает, можно добавить: 
-       mix-blend-mode: multiply; (но лучше использовать PNG без фона) */
-}
-
-#rooster:active {
-    transform: scale(0.9); /* Петух уменьшается при нажатии */
-}
-
