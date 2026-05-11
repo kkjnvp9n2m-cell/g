@@ -3,33 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Cock Clicker</title>
+    <title>Cock Clicker Pro</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="app">
-        <h1 id="name-tag">ПЕТУХ 🐓</h1>
+        <h1 id="name-tag">ПЭТУШАРЭ 🐓</h1>
         
         <div class="score-container">
             <span id="score">0</span> 💩
         </div>
 
         <div id="game-area">
-          <div id="rooster" onclick="clickRooster(event)">
-    <img src="rooster.png" id="rooster-pic" alt="петух">
-</div>
+            <div id="rooster" onclick="clickRooster(event)">
+                <img src="rooster.png" id="rooster-pic" alt="петух">
+            </div>
+        </div>
 
         <div class="shop">
-            <h3>Магазин какашек</h3>
+            <h3 class="shop-title">Магазин какашек</h3>
             <button id="upgrade-btn" onclick="buyUpgrade()">
-                Купить <span id="next-color">Цветную</span> 💩<br>
-                Цена: <span id="price">100</span>
+                <span id="btn-text">Купить Обычная 💩</span><br>
+                <span class="price-tag">Цена: <span id="price">100</span></span>
             </button>
         </div>
 
         <div id="final-message" class="hidden">
-            <h2>🎉 ТЫ МОЛОДЕЦ! 🎉</h2>
-            <p>Закидал пэтуха!</p>
+            <div class="modal">
+                <h2>🎉 ТЫ МОЛОДЕЦ! 🎉</h2>
+                <p>Закидал пэтуха по полной!</p>
+                <button onclick="location.reload()">Ещё раз?</button>
+            </div>
         </div>
     </div>
     <script src="script.js"></script>
