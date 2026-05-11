@@ -1,4 +1,4 @@
- let score = 0;
+  let score = 0;
 let clickPower = 1;
 let upgradeLevel = 0;
 
@@ -12,11 +12,12 @@ const poopColors = [
     { name: "ЗОЛОТАЯ", emoji: "✨", price: 409600, power: 16384 }
 ];
 
-function clickRooster(event) {
+// Функция клика
+window.clickRooster = function(event) {
     score += clickPower;
     updateUI();
     spawnPoop(event);
-}
+};
 
 function spawnPoop(event) {
     const poop = document.createElement('div');
@@ -26,13 +27,13 @@ function spawnPoop(event) {
     let currentEmoji = upgradeLevel === 0 ? "💩" : poopColors[upgradeLevel-1].emoji;
     poop.innerText = currentEmoji;
     
-    // Координаты центра петуха
+    // Центр экрана для вылета
     poop.style.left = "50%";
-    poop.style.top = "45%";
+    poop.style.top = "40%";
     
-    // Случайное направление разлета
+    // Рандомный разлет
     const angle = Math.random() * Math.PI * 2;
-    const dist = 100 + Math.random() * 150;
+    const dist = 100 + Math.random() * 100;
     const dx = Math.cos(angle) * dist + "px";
     const dy = Math.sin(angle) * dist + "px";
     
@@ -43,33 +44,42 @@ function spawnPoop(event) {
     setTimeout(() => poop.remove(), 700);
 }
 
-function buyUpgrade() {
-    let current = poopColors[upgradeLevel];
-    if (score >= current.price) {
-        score -= current.price;
-        clickPower = current.power;
-        upgradeLevel++;
-        updateUI();
-        
-        if (upgradeLevel >= poopColors.length) {
-            document.getElementById('final-message').classList.remove('hidden');
+// Покупка улучшения
+window.buyUpgrade = function() {
+    if (upgradeLevel < poopColors.length) {
+        let current = poopColors[upgradeLevel];
+        if (score >= current.price) {
+            score -= current.price;
+            clickPower = current.power;
+            upgradeLevel++;
+            updateUI();
+            
+            // Показываем финал только когда куплены ВСЕ 7 уровней
+            if (upgradeLevel === poopColors.length) {
+                document.getElementById('final-message').classList.remove('hidden');
+            }
         }
     }
-}
+};
 
 function updateUI() {
-    document.getElementById('score').innerText = Math.floor(score);
+    const scoreEl = document.getElementById('score');
+    const priceEl = document.getElementById('price');
+    const btnText = document.getElementById('btn-text');
+    const upgradeBtn = document.getElementById('upgrade-btn');
+
+    if (scoreEl) scoreEl.innerText = Math.floor(score);
     
     if (upgradeLevel < poopColors.length) {
         let next = poopColors[upgradeLevel];
-        document.getElementById('price').innerText = next.price;
-        document.getElementById('btn-text').innerText = "Купить " + next.name + " 💩";
-        document.getElementById('upgrade-btn').disabled = score < next.price;
+        if (priceEl) priceEl.innerText = next.price;
+        if (btnText) btnText.innerText = "Купить " + next.name + " 💩";
+        if (upgradeBtn) upgradeBtn.disabled = score < next.price;
     } else {
-        document.getElementById('upgrade-btn').innerText = "МАКСИМУМ!";
-        document.getElementById('upgrade-btn').disabled = true;
+        if (btnText) btnText.innerText = "МАКСИМУМ!";
+        if (upgradeBtn) upgradeBtn.disabled = true;
     }
 }
 
-// Проверка доступности кнопки каждые 100мс
-setInterval(updateUI, 100);
+// Запуск начального состояния
+updateUI();
